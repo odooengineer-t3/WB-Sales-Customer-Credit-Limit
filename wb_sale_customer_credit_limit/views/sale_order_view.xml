@@ -1,0 +1,59 @@
+<odoo>
+  <record id="view_order_form_inherit_credit" model="ir.ui.view">
+    <field name="name">sale.order.form.credit.limit</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_order_form"/>
+    <field name="arch" type="xml">
+
+      <!-- show credit info near partner -->
+      <xpath expr="//sheet" position="before">
+            <!-- Credit Limit Info -->
+            <div invisible="allow_credit_check == False">
+                <!-- When credit remaining is positive or zero -->
+                <div class="alert alert-success text-center "
+                     role="alert"
+                     invisible="remaining_credit &lt; 0 or partner_credit_limit == 0">
+                    Customer Credit Limit is 
+                    <field name="remaining_credit" readonly="1" class="text-success"/>
+                </div>
+
+                <!-- When credit remaining is negative -->
+                <div class="alert alert-danger text-center"
+                     role="alert"
+                     invisible="remaining_credit &gt;= 0 and partner_credit_limit != 0">
+                    Customer Credit Limit is
+                    <field name="remaining_credit" readonly="1" class="text-danger"/>
+                </div>
+            </div>
+        </xpath>
+
+      <!-- show exceeded amount in a header area -->
+      <xpath expr="//header" position="inside">
+        <field name="allow_credit_check" invisible="1"/>
+        <field name="partner_credit_limit" invisible="1"/>
+        <button name="action_request_credit_approval" type="object"
+          string="Credit Approver" class="oe_highlight"
+          invisible="allow_credit_check == False or remaining_credit &gt;= 0 or state != 'draft'"/>
+        <!-- <field name="exceeded_amount" readonly="1"/> -->
+      </xpath>
+
+
+      <!-- place approval request link in notebook as a tab -->
+        <xpath expr="//notebook" position="inside">
+       
+            <page string="Credit Approval" invisible="remaining_credit &gt;= 0" >
+            <!-- groups="sale_customer_credit_limit.group_credit_limit_approver, sale_customer_credit_limit.group_credit_limit_admin" -->
+            <group>
+                <field name="credit_approval_request_id" readonly="1"/>
+                <field name="credit_approved" readonly="1"/>
+            </group>
+            </page>
+      </xpath>
+
+      <xpath expr="//header/button[@id='create_invoice']" position="attributes">
+        <attribute name="invisible">not credit_approved or state not in ('sale','done') or invoice_status != 'to invoice'</attribute>
+      </xpath>
+
+    </field>
+  </record>
+</odoo>

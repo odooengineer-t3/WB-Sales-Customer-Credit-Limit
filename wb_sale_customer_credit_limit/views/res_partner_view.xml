@@ -1,0 +1,21 @@
+<odoo>
+  <record id="view_partner_form_inherit_credit_limit" model="ir.ui.view">
+    <field name="name">res.partner.form.credit.limit</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form"/>
+    <field name="arch" type="xml">
+      <!-- put in Customer Limit tab -->
+        <notebook position="inside">
+            <page string="Customer Limit">
+                <group>
+                    <field name="allow_credit_check"/>
+                    <field name="credit_limit_amount"/>
+                    <field name="total_receivables" readonly="1"/>
+                    <field name="total_payables" readonly="1"/>
+                    <field name="credit_approver_id"/>
+                </group>
+            </page>
+        </notebook>
+    </field>
+  </record>
+</odoo>

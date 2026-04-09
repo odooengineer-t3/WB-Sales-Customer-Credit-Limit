@@ -1,0 +1,105 @@
+<odoo>
+    <!-- ========================= -->
+    <!-- 1️⃣ Administration Tab -->
+    <!-- ========================= -->
+    <record id="view_credit_partner_tree" model="ir.ui.view">
+        <field name="name">credit.partner.tree</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="allow_credit_check"/>
+                <field name="credit_limit_amount"/>
+                <field name="total_receivables"/>
+                <field name="total_payables"/>
+                <field name="credit_approver_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_credit_partner_form" model="ir.ui.view">
+        <field name="name">credit.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <form string="Customer Credit Limit">
+                <sheet>
+                    <group>
+                        <group string="Credit Limit Details">
+                            <field name="name" readonly="1"/>
+                            <field name="allow_credit_check"/>
+                            <field name="credit_limit_amount"/>
+                            <field name="total_receivables" readonly="1"/>
+                            <field name="total_payables" readonly="1"/>
+                        </group>
+                        <group string="Credit Approval">
+                            <field name="credit_approver_id"/>
+                            <field name="company_currency_id" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_credit_partner" model="ir.actions.act_window">
+        <field name="name">Users</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('allow_credit_check','=',True)]</field>
+    </record>
+
+    <!-- ========================= -->
+    <!-- 2️⃣ Users Tab -->
+    <!-- ========================= -->
+    <record id="view_credit_user_tree" model="ir.ui.view">
+        <field name="name">credit.user.tree</field>
+        <field name="model">res.users</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="is_credit_approver"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_credit_user_form" model="ir.ui.view">
+        <field name="name">credit.user.form</field>
+        <field name="model">res.users</field>
+        <field name="arch" type="xml">
+            <form string="Credit Approver Access">
+                <sheet>
+                    <group>
+                        <field name="name" readonly="1"/>
+                        <field name="is_credit_approver"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_credit_user" model="ir.actions.act_window">
+        <field name="name">Administration</field>
+        <field name="res_model">res.users</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_credit_approver', '=', True)]</field>
+    </record>
+
+    <!-- ========================= -->
+    <!-- 3️⃣ Menu Structure -->
+    <!-- ========================= -->
+    <menuitem id="menu_credit_limit_root"
+              name="Credit Limit"
+              parent="sale.sale_menu_root"/>
+
+    <menuitem id="menu_credit_admin"
+              name="Users"
+              parent="menu_credit_limit_root"
+              action="action_credit_partner"
+              groups="base.group_system"/>
+
+    <menuitem id="menu_credit_users"
+              name="Administration"
+              parent="menu_credit_limit_root"
+              action="action_credit_user"
+              groups="base.group_user"/>
+</odoo>

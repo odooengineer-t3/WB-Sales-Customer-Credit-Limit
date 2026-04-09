@@ -1,0 +1,16 @@
+<odoo>
+    <record id="group_credit_limit_admin" model="res.groups">
+        <field name="name">Credit Limit Administrator</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+
+    <record id="group_credit_limit_approver" model="res.groups">
+        <field name="name">Credit Limit Approver</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+
+    <record id="group_credit_limit_viewer" model="res.groups">
+        <field name="name">Credit Approver Viewer</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+</odoo>

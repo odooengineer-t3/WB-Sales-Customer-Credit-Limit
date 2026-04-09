@@ -1,0 +1,28 @@
+<odoo>
+    <record id="module_category_credit_limit" model="ir.module.category">
+        <field name="name">Credit Limit Management</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <!-- Administrator -->
+    <record id="group_credit_limit_admin" model="res.groups">
+        <field name="name">Credit Limit Admin</field>
+        <field name="category_id" ref="module_category_credit_limit"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_system'))]"/>
+        <field name="comment">Administrators can configure and assign credit limits.</field>
+    </record>
+
+    <!-- Approver -->
+    <record id="group_credit_limit_approver" model="res.groups">
+        <field name="name">Credit Limit Approver</field>
+        <field name="category_id" ref="module_category_credit_limit"/>
+        <field name="comment">Users who can approve customer credit requests.</field>
+    </record>
+
+    <!-- Viewer -->
+    <record id="group_credit_limit_viewer" model="res.groups">
+        <field name="name">Credit Limit Viewer</field>
+        <field name="category_id" ref="module_category_credit_limit"/>
+        <field name="comment">Users who can only view credit information.</field>
+    </record>
+</odoo>
