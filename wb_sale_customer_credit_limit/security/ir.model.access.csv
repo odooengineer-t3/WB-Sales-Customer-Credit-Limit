@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+credit_limit_admin_access,credit.limit.admin,model_res_partner,group_credit_limit_admin,1,1,1,1
+credit_limit_viewer_access,credit.limit.viewer,model_res_partner,group_credit_limit_viewer,1,1,1,1
+access_credit_limit_request_user,access.credit.limit.request.user,model_credit_limit_request,base.group_user,1,1,1,1
+access_credit_limit_request_admin,access.credit.limit.request.admin,model_credit_limit_request,group_credit_limit_admin,1,1,1,1
+access_credit_limit_approval_wizard,access.credit.limit.approval.wizard,model_credit_limit_approval_wizard,,1,1,1,1
