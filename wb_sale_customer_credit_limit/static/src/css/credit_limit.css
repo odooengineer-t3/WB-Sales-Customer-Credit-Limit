@@ -1,0 +1,19 @@
+/* in manifest add this css under 'assets' or 'css' depending on Odoo version */
+.o_credit_exceeded {
+    color: #b00;
+    font-weight: bold;
+}
+
+.oe_credit_box {
+    padding: 10px 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    color: white;
+    font-weight: 600;
+}
+.oe_credit_box.oe_ok {
+    background-color: #28a745; /* Green */
+}
+.oe_credit_box.oe_exceeded {
+    background-color: #dc3545; /* Red */
+}

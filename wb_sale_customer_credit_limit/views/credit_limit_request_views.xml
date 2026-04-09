@@ -1,0 +1,32 @@
+<odoo>
+  <record model="ir.ui.view" id="credit_limit_request_form">
+    <field name="name">credit.limit.request.form</field>
+    <field name="model">credit.limit.request</field>
+    <field name="arch" type="xml">
+      <form string="Credit Limit Request">
+        <sheet>
+          <group>
+            <field name="reference"/>
+            <field name="sale_order_id" readonly="1"/>
+            <field name="partner_id" readonly="1"/>
+            <field name="requested_by" readonly="1"/>
+            <field name="approver_id"/>
+            <field name="amount_exceeded" readonly="1"/>
+            <field name="state" readonly="1"/>
+          </group>
+          <footer>
+            <button string="Approve" name="action_approve" type="object"
+                     class="btn-primary"
+                    invisible="state != 'pending'" />
+            <button string="Reject" name="action_reject" type="object"
+                     class="btn-secondary"
+                    invisible="state != 'pending'" />
+            <button string="Close" class="btn-default" special="cancel"/>
+          </footer>
+        </sheet>
+      </form>
+    </field>
+  </record>
+  
+  
+</odoo>
